@@ -17,4 +17,5 @@ weight, weight_c = model.getWeights()
 
 y_pred = model.predict(df_X)
 
+print(weight, weight_c)
 print(validate(y_pred, df_y))
