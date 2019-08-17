@@ -7,7 +7,7 @@ class LinearRegression:
         self.weight = np.array([])
         self.weight_c = 0
 
-    def fit(self, records, label,a=0.001,lamb=1):
+    def fit(self, records, label,a=0.001,lamb=1,epsilon=0.0001):
         X = np.array(records)
         y = np.array(label)
         self.weight = np.ones(X.shape[1])
@@ -16,6 +16,7 @@ class LinearRegression:
         for i in range(0,1000):
             # calculates cost sum(h(N,1))=1
             cost = np.mean((self.h(X) - y)**2)
+
             #  c(1) = c(1) - mean[ h(M,1) - y(M,1) ]
             weight_c_new = self.weight_c - a*np.mean((self.h(X) - y))
             # w(N,1) = w(N,1) - divide[ (M,N)T.(M,1), M ]=(N,1)

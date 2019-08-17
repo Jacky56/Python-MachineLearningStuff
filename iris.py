@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
-from Models import LinearRegression as linear
-
+from SupervisedModels import LinearRegression as linear
 
 dataset = pd.read_csv("source/iris_numeric_lables.data")
 df_X = dataset.iloc[:,0:4]
