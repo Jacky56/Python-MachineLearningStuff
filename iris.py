@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from Linear import LinearRegression as linear
+from Models import LinearRegression as linear
 
 
 dataset = pd.read_csv("source/iris_numeric_lables.data")

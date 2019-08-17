@@ -1,6 +1,6 @@
 import numpy as np
 
-from Linear import LinearRegression
+from Models import LinearRegression
 
 a = np.array([[2,5],[1, 2],[1,3]])
 print(np.cov(a[0],a[1]))
