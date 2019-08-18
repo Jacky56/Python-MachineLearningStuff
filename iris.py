@@ -19,3 +19,8 @@ y_pred = model.predict(df_X)
 
 print(weight, weight_c)
 print(validate(y_pred, df_y))
+
+dataset = pd.read_csv("source/iris.data")
+df_y = dataset.iloc[:,4]
+
+print(model.toNumeric(df_y))

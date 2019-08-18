@@ -42,8 +42,16 @@ class LinearRegression:
     def regularization(self,weight,lamb):
         return lamb*np.sum(weight**2)
 
+
     def predict(self, X):
         return np.round(self.h(X))
+
+    def toNumeric(self,data):
+        numericLabel = np.unique(data)
+        data_new = data
+        for i in range(0, len(numericLabel)):
+            np.put(data_new, np.where(data == numericLabel[i]), [i])
+        return data_new, numericLabel
 
     def loss(self, X_record, y_value):
         return self.h(X_record) - y_value
