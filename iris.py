@@ -7,7 +7,7 @@ from SupervisedModels import LogisticRegression as Log_model
 
 # checks accuracy
 def validate(y_pred, y_real):
-    return 1 - np.divide(np.sum(np.abs(y_pred - y_real)), y_real.shape[0])
+    return np.divide(np.array(np.where(y_pred == y_real)).size, y_real.shape[0])
 
 
 def linear(x,y):

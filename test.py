@@ -2,10 +2,7 @@ import numpy as np
 
 from SupervisedModels import LinearRegression
 
+a = np.ones(10).reshape(5,2)
 
 
-a = np.arange(4).reshape((2,2))
-b = np.arange(4).reshape((2,2))
-print(a*b)
-print(a)
-print(np.sum(a*b,axis=0))
+print (a[np.array(np.argwhere(a == 1))])
