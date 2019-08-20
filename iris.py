@@ -18,6 +18,7 @@ def linear(x,y):
     print(weight, weight_c)
     print(validate(y_pred, y))
 
+
 def logistic(x,y):
     model = Log_model.LogisticRegression()
     model.fit(x, y)
@@ -25,6 +26,7 @@ def logistic(x,y):
     weight, weight_c = model.getWeights()
     print(weight, weight_c)
     print(validate(y_pred, y))
+    print(np.unique(y_pred))
 
 
 # PCa stuff
@@ -43,7 +45,7 @@ def lieaner_pca(x,y):
 
 
 
-dataset = pd.read_csv("source/iris_numeric_lables.data")
+dataset = pd.read_csv("source/iris_n.data")
 df_X = dataset.iloc[:,0:4]
 df_y = dataset.iloc[:,4]
 
