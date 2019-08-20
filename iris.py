@@ -26,7 +26,7 @@ def logistic(x,y):
     weight, weight_c = model.getWeights()
     print(weight, weight_c)
     print(validate(y_pred, y))
-    print(np.unique(y_pred))
+    print(model.predict(np.array([5.1,3.4,1.5,0.23])))
 
 
 # PCa stuff
