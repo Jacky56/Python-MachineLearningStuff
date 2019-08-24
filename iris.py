@@ -26,7 +26,6 @@ def logistic(x,y):
     weight, weight_c = model.getWeights()
     print(weight, weight_c)
     print(validate(y_pred, y))
-    print(model.predict(np.array([5.1,3.4,1.5,0.23])))
 
 
 # PCa stuff
@@ -42,11 +41,9 @@ def lieaner_pca(x,y):
     print(validate(y_pred, y))
     print(pca.explained_variance_ratio_)
 
-
-
-
 dataset = pd.read_csv("source/iris_n.data")
 df_X = dataset.iloc[:,0:4]
 df_y = dataset.iloc[:,4]
 
+linear(df_X,df_y)
 logistic(df_X,df_y)
