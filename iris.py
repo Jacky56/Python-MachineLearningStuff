@@ -9,49 +9,42 @@ from SupervisedModels import LogisticRegression as Log_model
 def validate(y_pred, y_real):
     return np.divide(np.array(np.where(y_pred == y_real)).size, y_real.shape[0])
 
+def mean_normalise(X):
+    mu = np.mean(X,axis=0)
+    std = np.std(X)
+    return (X - mu) / std
 
-def linear(x,y):
-    model = Linear_Model.LinearRegression()
-    model.fit(x, y)
-    y_pred = model.predict(x)
-    weight, weight_c = model.getWeights()
-    print(weight, weight_c)
+
+def useModel(model,X,y):
+    model.fit(X, y)
+    y_pred = model.predict(X)
     print(validate(y_pred, y))
-
-def linear_norm(x,y):
-    model = Linear_norm_Model.LinearNormal()
-    model.fit(x, y)
-    y_pred = model.predict(x)
-    weight, weight_c = model.getWeights()
-    print(weight, weight_c)
-    print(validate(y_pred, y))
-
-def logistic(x,y):
-    model = Log_model.LogisticRegression()
-    model.fit(x, y)
-    y_pred = model.predict(x)
-    weight, weight_c = model.getWeights()
-    print(weight, weight_c)
-    print(validate(y_pred, y))
-
+    return model.getWeights()
 
 # PCa stuff
-def lieaner_pca(x,y):
+def pca(model,X,y,infoGain=0.975):
     # PCa stuff
-    model_pca = Linear_Model.LinearRegression()
-    pca = PCA(.975)
-    pca.fit(x)
-    model_pca.fit(pca.transform(x), y)
-    y_pred = model_pca.predict(pca.transform(x))
-    weight, weight_c = model_pca.getWeights()
-    print(weight, weight_c)
+    pca = PCA(infoGain)
+    pca.fit(X)
+    model.fit(pca.transform(X), y)
+    y_pred = model.predict(pca.transform(X))
     print(validate(y_pred, y))
     print(pca.explained_variance_ratio_)
+    return model.getWeights()
+
+
+
 
 dataset = pd.read_csv("source/iris_n.data", header=None)
 df_X = dataset.iloc[:,0:4]
 df_y = dataset.iloc[:,4]
 
-#linear(df_X,df_y)
-#logistic(df_X,df_y)
-linear_norm(df_X,df_y)
+df_X = mean_normalise(df_X)
+
+linear = Linear_Model.LinearRegression()
+logistic = Log_model.LogisticRegression()
+linear_norm = Linear_norm_Model.LinearNormal()
+
+
+#print(useModel(linear_norm, df_X, df_y))
+print(pca(linear, df_X, df_y,0.99))
