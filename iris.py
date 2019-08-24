@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.decomposition import PCA
 from SupervisedModels import LinearRegression as Linear_Model
-
+from SupervisedModels import LinearRegNormalEq as Linear_norm_Model
 from SupervisedModels import LogisticRegression as Log_model
 
 # checks accuracy
@@ -18,6 +18,13 @@ def linear(x,y):
     print(weight, weight_c)
     print(validate(y_pred, y))
 
+def linear_norm(x,y):
+    model = Linear_norm_Model.LinearNormal()
+    model.fit(x, y)
+    y_pred = model.predict(x)
+    weight, weight_c = model.getWeights()
+    print(weight, weight_c)
+    print(validate(y_pred, y))
 
 def logistic(x,y):
     model = Log_model.LogisticRegression()
@@ -41,9 +48,10 @@ def lieaner_pca(x,y):
     print(validate(y_pred, y))
     print(pca.explained_variance_ratio_)
 
-dataset = pd.read_csv("source/iris_n.data")
+dataset = pd.read_csv("source/iris_n.data", header=None)
 df_X = dataset.iloc[:,0:4]
 df_y = dataset.iloc[:,4]
 
-linear(df_X,df_y)
-logistic(df_X,df_y)
+#linear(df_X,df_y)
+#logistic(df_X,df_y)
+linear_norm(df_X,df_y)
