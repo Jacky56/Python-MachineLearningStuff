@@ -46,5 +46,5 @@ logistic = Log_model.LogisticRegression()
 linear_norm = Linear_norm_Model.LinearNormal()
 
 
-#print(useModel(linear_norm, df_X, df_y))
-print(pca(linear, df_X, df_y,0.99))
+print(useModel(linear_norm, df_X, df_y))
+#print(pca(linear, df_X, df_y,0.99))
