@@ -2,7 +2,7 @@ import numpy as np
 
 class NeuralNetworks:
 
-    def fit(self, records, label, a=0.001, lamb=1,hiddenlayer=[5,6]):
+    def fit(self, records, label, a=0.5, lamb=0.04,hiddenlayer=[5,6]):
 
         # x(M,N)
         X = np.array(records)
@@ -36,7 +36,7 @@ class NeuralNetworks:
             deltasets.reverse()
 
             for i in np.arange(len(layers) - 1):
-                self.weights[i] += np.divide(alphasets[i].T.dot(deltasets[i]),X.shape[0])
+                self.weights[i] += np.divide(a*(alphasets[i].T.dot(deltasets[i])) - lamb*self.weights[i], X.shape[0])
 
 
     def cost(self, X, y):
