@@ -19,7 +19,6 @@ class LogisticRegression(LinearRegression):
         self.weight_c = np.ones(np.unique(label).shape[0])
 
         for i in range(0,10000):
-            # calculates cost sum[ h(N,1) - (N,1) ]=1
             # w_c(K,1) = w_c(K,1) - sum x [ h(M,K) - y(M,K) ]=(1,K).T
             weight_c_new = self.weight_c - a*np.sum((self.h(X) - y)/X.shape[0], axis=0).T
             # w(N,1) = w(N,1) - divide[ (M,N).T.(M,K), M ]=(N,K).T

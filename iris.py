@@ -4,6 +4,7 @@ from sklearn.decomposition import PCA
 from SupervisedModels import LinearRegression as Linear_Model
 from SupervisedModels import LinearRegNormalEq as Linear_norm_Model
 from SupervisedModels import LogisticRegression as Log_model
+from SupervisedModels import NeuralNetworks as NN_model
 
 # checks accuracy
 def validate(y_pred, y_real):
@@ -44,7 +45,8 @@ df_X = mean_normalise(df_X)
 linear = Linear_Model.LinearRegression()
 logistic = Log_model.LogisticRegression()
 linear_norm = Linear_norm_Model.LinearNormal()
+nn = NN_model.NeuralNetworks()
 
 
-print(useModel(linear_norm, df_X, df_y))
+print(useModel(nn, df_X, df_y))
 #print(pca(linear, df_X, df_y,0.99))

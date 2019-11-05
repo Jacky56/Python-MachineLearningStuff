@@ -18,16 +18,13 @@ class LinearRegression:
             #  c(1) = c(1) - mean[ h(M,1) - y(M,1) ]=1
             weight_c_new = self.weight_c - a*np.mean((self.h(X) - y))
             # w(N,1) = w(N,1) - divide[ (M,N)T.(M,1), M ]=(N,1)
-            weight_new = self.weight - a*np.divide(X.T.dot(self.h(X) - y) + self.regularization(self.weight,lamb), X.shape[0])
+            weight_new = self.weight - a*np.divide(X.T.dot(self.h(X) - y) + lamb*self.weight, X.shape[0])
             # update weights
             self.weight = weight_new
             self.weight_c = weight_c_new
 
             if i % 1000 == 0:
                 print(self.cost(X,y))
-
-    def regularization(self,weight,lamb):
-        return lamb*np.sum(weight**2)
 
     # (M,N)T.(M,1), M ]=(N,1)
     def cost(self, X, y):
