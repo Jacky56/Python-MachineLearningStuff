@@ -5,7 +5,7 @@ from SupervisedModels.LinearRegression import LinearRegression
 
 class LogisticRegression(LinearRegression):
 
-    def fit(self, records, label,a=0.001,lamb=1):
+    def fit(self, records, label,a=0.001,lamb=0.03):
         # x(M,N)
         X = np.array(records)
         # y(M,K)
