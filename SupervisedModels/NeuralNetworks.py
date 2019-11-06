@@ -23,19 +23,25 @@ class NeuralNetworks:
 
         for i in range(0,10000):
             alpha = X
+            # alphasets(L-1,?)
             alphasets = [alpha]
             for i in np.arange(len(layers) - 1):
+                # alpha(M,?) = alpha(M,?).theta(?,?)
                 alpha = self.g(alpha.dot(self.weights[i]))
                 alphasets.append(alpha)
 
             delta = y - alpha
+            # deltasets(L-1,?)
             deltasets = [delta]
             for i in np.arange(len(layers) - 2,0,-1):
+                # delta(M,?) = delta(M,?).theta(?,?).T*alpha(?,?)*(1-alpha(?,?))
+                # g'(z) = alpha(?,?)*(1-alpha(?,?))
                 delta = delta.dot(self.weights[i].T)*alphasets[i]*(1-alphasets[i])
                 deltasets.append(delta)
             deltasets.reverse()
 
             for i in np.arange(len(layers) - 1):
+                # theta +=  a*(alpha[l].T.deltasets[l+1])/M - lambda*theta/M
                 self.weights[i] += np.divide(a*(alphasets[i].T.dot(deltasets[i])) - lamb*self.weights[i], X.shape[0])
 
 
