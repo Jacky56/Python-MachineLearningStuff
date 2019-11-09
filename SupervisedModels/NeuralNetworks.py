@@ -20,7 +20,7 @@ class NeuralNetworks:
             self.bias.append((np.random.rand(1, self.layers[i + 1])*2 - 1))
 
 
-        for i in range(0,10000):
+        for k in range(0,100000):
             alpha = X
             # alphasets(L-1,?)
             alphasets = [alpha]
@@ -44,14 +44,17 @@ class NeuralNetworks:
                 self.weights[i] += np.divide(a*(alphasets[i].T.dot(deltasets[i])) - lamb*self.weights[i], X.shape[0])
                 self.bias[i] += a*np.mean(deltasets[i],axis=0)
 
-    def cost(self, X, y):
+            if k % 500 == 0:
+                print("cost:", self.cost(X,y,lamb))
 
-        return None
+    def cost(self, X, y, lamb):
+        sumWieghts = 0
+        for i in self.weights:
+            sumWieghts += np.sum(i)
+        return np.mean(-np.log(self.h(X)) * y - np.log(1 - self.h(X)) * (1 - y)) + sumWieghts*lamb/(2*X.shape[0])
 
+    # h(X) = [M,1]
     def h(self, X):
-        return None
-
-    def apply(self, X):
         alpha = X
         for i in np.arange(len(self.layers) - 1):
             alpha = self.g(alpha.dot(self.weights[i]) + self.bias[i])
@@ -62,7 +65,7 @@ class NeuralNetworks:
 
     def predict(self, X):
         # (M,1)
-        return np.argmax(self.apply(X).T, axis=0)
+        return np.argmax(self.h(X).T, axis=0)
 
     def getWeights(self):
         return self.weights, self.bias
